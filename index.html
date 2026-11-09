@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOIKAT | Premium Store</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a href="#" class="logo">Soi<span>KaT.</span></a>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#categories">Categories</a>
+    <a href="#footer">Contact</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button class="icon-btn" id="searchToggle" aria-label="Search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+    <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
+      <i class="fa-regular fa-heart"></i>
+      <span class="count" id="wishCount">0</span>
+    </button>
+    <button class="icon-btn cart-btn" id="cartToggle" aria-label="Cart">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span class="count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<div class="search-panel" id="searchPanel">
+  <input id="searchInput" type="text" placeholder="Search products...">
+  <button id="searchClose"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">WELCOME TO SOIKAT</span>
+      <h1>Upgrade Your<br><span>Everyday Life.</span></h1>
+      <p>Discover premium technology, fashion and lifestyle products at amazing prices.</p>
+      <a href="#products" class="primary-btn">Explore Collection <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="hero-stats">
+        <div><strong>0K+</strong><small>Customers</small></div>
+        <div><strong>500+</strong><small>Products</small></div>
+        <div><strong>0/5</strong><small>Rating</small></div>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <div class="hero-glow"></div>
+      <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800" alt="Premium headphones">
+      <div class="floating-card">
+        <span>Trending Product</span>
+        <strong>Premium Audio</strong>
+        <small>Starting from ৳2,500</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories section" id="categories">
+    <div class="section-heading">
+      <div><span class="eyebrow">EXPLORE</span><h2>Shop by Category</h2></div>
+    </div>
+    <div class="category-list">
+      <button class="category-card active" data-category="All">
+        <i class="fa-solid fa-border-all"></i><span>All Products</span>
+      </button>
+      <button class="category-card" data-category="Electronics">
+        <i class="fa-solid fa-headphones"></i><span>Electronics</span>
+      </button>
+      <button class="category-card" data-category="Fashion">
+        <i class="fa-solid fa-shirt"></i><span>Fashion</span>
+      </button>
+      <button class="category-card" data-category="Accessories">
+        <i class="fa-solid fa-glasses"></i><span>Accessories</span>
+      </button>
+      <button class="category-card" data-category="Lifestyle">
+        <i class="fa-solid fa-couch"></i><span>Lifestyle</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="products section" id="products">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">OUR COLLECTION</span>
+        <h2>Featured Products</h2>
+        <p class="muted">Discover products picked just for you.</p>
+      </div>
+      <select id="sortSelect" aria-label="Sort products">
+        <option value="default">Sort By: Featured</option>
+        <option value="low">Price: Low to High</option>
+        <option value="high">Price: High to Low</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+    <p id="emptyMessage" class="empty-message" hidden>No products found.</p>
+  </section>
+
+  <section class="newsletter section">
+    <div>
+      <span class="eyebrow">STAY CONNECTED</span>
+      <h2>Get 10% Off Your First Order</h2>
+      <p>Subscribe to our newsletter for exclusive deals and new arrivals.</p>
+    </div>
+    <form id="newsletterForm">
+      <input type="email" placeholder="Enter your email" required>
+      <button class="primary-btn">Subscribe</button>
+    </form>
+  </section>
+</main>
+
+<!-- Cart Drawer -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="drawer-header">
+    <h2>Your Cart <span id="drawerCount">(0)</span></h2>
+    <button class="close-btn" id="cartClose" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="coupon">
+      <input id="couponInput" placeholder="Coupon code">
+      <button id="couponApply">Apply</button>
+    </div>
+    <div class="price-row"><span>Subtotal</span><strong id="subtotal">৳0</strong></div>
+    <div class="price-row"><span>Discount</span><strong id="discount">৳0</strong></div>
+    <div class="price-row total"><span>Total</span><strong id="total">৳0</strong></div>
+    <button id="checkoutBtn" class="primary-btn full-btn">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
+  </div>
+</aside>
+
+<!-- Product Details Modal -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-content">
+    <button class="close-btn modal-close" id="modalClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-content checkout-content">
+    <button class="close-btn modal-close" id="checkoutClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <span class="eyebrow">COMPLETE YOUR ORDER</span>
+    <h2>Checkout</h2>
+    <form id="checkoutForm">
+      <label>Full Name</label>
+      <input name="name" required placeholder="Your full name">
+      <label>Email Address</label>
+      <input name="email" type="email" required placeholder="your@email.com">
+      <label>Phone Number</label>
+      <input name="phone" type="tel" required placeholder="01XXXXXXXXX">
+      <label>Delivery Address</label>
+      <textarea name="address" required placeholder="Your full address"></textarea>
+      <label>Payment Method</label>
+      <select name="payment" required>
+        <option value="Cash on Delivery">Cash on Delivery</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+      </select>
+      <div class="checkout-total">Order Total: <strong id="checkoutTotal">৳0</strong></div>
+      <button type="submit" class="primary-btn full-btn">Place Order</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<footer id="footer">
+  <a href="#" class="logo">NEX<span>ORA.</span></a>
+  <p>Premium shopping experience. Made with passion.</p>
+  <p class="copyright">© 2026 NEXORA. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
